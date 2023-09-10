@@ -1,0 +1,443 @@
+@charset "utf-8";
+
+/*
+Theme Name:Tomomi-01
+Author: Office Niko
+Version 1.0.1
+*/
+
+/*--------------------
+Base
+----------------------*/
+$key_color: #121212 ; /*example nav's background-color*/
+$bg_color: #ffffff ; /*example button's background-dolor*/
+$font_color: #121212 ; /*example button's font color*/
+$font_color2: #ffffff ; /*example button's point color*/
+
+$bp_m : 767px;    /* m = mobile */
+$bp_t : 768px;    /* t = tablet */
+$bp_pc: 900px;
+
+/* media mixin */
+/* ＰＣファースト 指定以下に適用 */
+@mixin media_tab(){
+  @media screen and (max-width: $bp_pc){
+    @content;
+  }
+}
+@mixin media_m(){
+  @media screen and (max-width: $bp_t){
+    @content;
+  }
+}
+/* モバイルファースト */
+@mixin media_pc(){
+  @media screen and (min-width: $bp_pc){
+    @content;
+  }
+}
+// @mixin media_tab(){
+//   @media screen and (min-width: $bp_t){
+//     @content;
+//   }
+// }
+
+
+*, *::before, *::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+  scroll-behavior: smooth;
+  margin: 0 auto;
+  padding: 0;
+  color: $font_color;
+}
+a{
+  text-decoration: none;
+  color: $font_color;
+}
+
+li{
+  list-style: none;
+  list-style-position: inside;
+}
+img{
+  max-width: 100%;
+  vertical-align: bottom;
+}
+h1,h2,h3,h4,h5,h6{
+  text-align: center;
+}
+
+  /*ページトップへ戻るボタン*/
+  .to_pagetop {
+    height: 8vh;
+    width: 8vh;
+    position: fixed;
+    right: 5vw;
+    bottom: 5vh;
+    background: $key_color;
+    border: solid 2px $bg_color;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    transition: 0.5s;
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
+  .pagetop_arrow {
+    height: 3vh;
+    width: 3vh;
+    border-top: 3px solid $bg_color;
+    border-right: 3px solid $bg_color;
+    transform: translateY(90%) translatex(70%) rotate(-45deg);
+  }
+
+/*--------------------
+ヘッダー　メニュー
+----------------------*/
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $bg_color;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  height: 80px;
+  z-index: 999;
+
+  .header_top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .header_left{
+      h1{
+        display: inline-block;
+        height: 80px;
+        vertical-align: middle;
+        padding: 10px 0;
+      }
+      .header_menu{
+        position: fixed;
+        top: 0;
+        left: -100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        width: 100%;
+        height: 100vh;
+        opacity: 0;
+        .nav{
+          position: absolute;
+          top: 0;
+          left: -300px;
+          padding-top: 50px;
+          width: 300px;
+          height: 100vh;
+          background-color: #121212;
+          transition: 1s;
+          ul{
+            margin-bottom: 60px;
+            li{
+              // text-align: cenm;
+              padding: 15px 0;
+              width: 200px;
+              margin: 0 auto;
+            }
+            .menu_li{
+              border-top: 1px solid $bg_color;
+              &:last-child{
+                border-bottom: 1px solid $bg_color;
+              }
+            }
+            .sns_li{
+              padding: 10px 0;
+              font-size: 0.8em;
+            }
+
+
+            a{
+              display: block;
+              width: 100%;
+              color: $font_color2;
+            }
+          }
+          &.active{
+            left: 0;
+          }
+        }
+        &.active{
+          left: 0;
+          opacity: 1;
+        }
+      }
+    }
+    .header_right{  
+      /*ハンバーガーボタン*/
+    .open_btn{
+      position: relative;/*ボタン内側の基点となるためrelativeを指定*/
+      color:$key_color;
+      cursor: pointer;
+      width: 50px;
+      height:50px;
+      border-radius: 5px;
+      margin-right: 2vw;
+  
+    }
+    /*ボタン内側*/
+    .open_btn span{
+      display: inline-block;
+      transition: all .4s;/*アニメーションの設定*/
+      position: absolute;
+      left: 14px;
+      height: 2px;
+      border-radius: 5px;
+      background: $key_color;
+      width: 45%;
+      }
+    .open_btn span:nth-of-type(1) {
+      top:13px;
+    }
+  .open_btn span:nth-of-type(2) {
+      top:19px;
+    }
+    .open_btn span:nth-of-type(3) {
+      top:25px;
+    }
+    
+  /*activeクラスが付与されると線が回転して×になり、Menu⇒Closeに変更*/
+    .open_btn.active span:nth-of-type(1) {
+      background-color: $bg_color;
+      top: 14px;
+      left: 18px;
+      transform: translateY(6px) rotate(-45deg);
+      width: 30%;
+    }
+    .open_btn.active span:nth-of-type(2) {
+      opacity: 0;
+    }
+    .open_btn.active span:nth-of-type(3){
+      background-color: $bg_color;
+      top: 26px;
+      left: 18px;
+      transform: translateY(-6px) rotate(45deg);
+      width: 30%;
+    }
+    }
+  }
+
+}
+/*--------------------
+共通設定
+----------------------*/
+section{
+  margin: 0px 0 80px;
+  padding-top: 100px;
+  .section_title{
+    font-size: 1.8em;
+    padding: 15px 0;
+  }
+}
+
+
+/*メイン*/
+main{
+  width: 100%;
+
+  /*ファーストビュー　ムービー*/
+  .video{
+    width: 100%;
+    height: 100vh;
+    video{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  /* Pick Up*/
+  .pickup{
+    width: 100%;
+    .pickup_wrap{
+      font-size: 0;
+      li{
+        padding: 0 30px;
+        img{
+        }
+      }
+    }
+
+  }
+
+  /*feature*/
+  .feature{
+    .item_wrap{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 26px;
+
+      .item{
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+        .item_img{
+          opacity: 0;
+          transform: translatey(20px);
+          transition: all 1s;
+          img{
+            width: 100%;
+            height: 100%;
+            // vertical-align: top;
+            object-fit: cover;
+          }
+        }
+        .contents_wrap{
+          padding: 30px 30px 20px;
+          p{
+            padding-bottom: 20px;
+          }
+          .content_title{
+            font-size: 0.8em;
+  
+          }
+          .content_text{
+            font-size: 0.9em;
+            font-weight: bold;
+          }
+          .content_date{
+            text-align: right;
+            font-size: 0.8em;
+          }
+        }
+      }
+    }
+  }
+}
+/*--------------------
+contact　フッター　
+----------------------*/
+.contact{
+  padding-top: 30px;
+  background-color:$key_color;
+  color: $font_color2;
+  
+  
+  .footer_wrap{
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+
+    .footer_left{
+      padding-right: 30px;
+      width: 45%;
+      .title, .text{
+        margin: 0 0 20px;
+        font-size: 0.8em;
+      }
+      
+    }
+    .footer_right{
+      padding-left: 30px;
+      width: 45%;
+      form{
+        input{
+          width: 100%;
+          height: 2em;
+          margin-bottom: 20px;
+        }
+        textarea{
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        input[type="submit"]{
+          padding: 10px 30px;
+          width: 30%;
+          height: auto;
+          background-color: $key_color;
+          border: 1px solid $bg_color;
+          color: $font_color2;
+          
+        }
+
+      }
+
+    }
+  }
+  .footer_copy{
+    margin-top: 20px;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+    font-size: 0.7em;
+  }
+}
+
+/*--------------------
+メディアクエリ
+----------------------*/
+@include media_tab(){
+
+  /*ヘッダー*/
+  .header{
+    .header_top{
+      .header_left{
+        h1{
+          margin: 0;
+          padding: 0;
+          height: 40px;
+        }
+        .header_menu{
+        }
+      }
+      .header_right{
+      }
+    }
+  }
+
+  main{
+    /*pickup*/
+    .pickup{
+
+    }
+
+    /*feature*/
+    .feature{
+      padding: 80px 16px;
+      .item_wrap{
+        .item{
+          padding: 16px;
+        }
+      }
+    }
+  }
+
+  /*フッター contact*/
+  .contact{
+    .footer_wrap{
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+      
+      .footer_left{
+        width: 100%;
+        padding: unset;
+      }
+      .footer_right{
+        width: 100%;
+        padding: unset;
+        form{
+          input[type="submit"]{
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+}
